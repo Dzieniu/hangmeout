@@ -2,13 +2,20 @@ angular.module('hangmeoutApp').controller('mainCtrl', [
 '$scope',
 
 function($scope){
-	$scope.text = "KochamCie";
 
-	var riddleText = [];
-	$scope.hiddenRiddleText = [];
-	var isWin=0;
-	var isLose =0;
-	$scope.chances = 5;
+	var playerOne=true;
+	var playerTwo=false;
+	var playerOneHitLetters = [];
+	var playerTwoHitLetters = [];
+	
+	var hangmenPhotos = ["../images/1.png","../images/2.png","../images/3.png","../images/4.png","../images/5.png","../images/6.png"];
+
+	$scope.players=[{name:"Konrad", text:"czesc", isWin:0,isLose:1,chances:5,riddleText:[],hiddenRiddleText:[],photo:hangmenPhotos[0],photonr:0},
+					{name:"Kicia", text:"hej", isWin:0,isLose:1,chances:5,riddleText:[],hiddenRiddleText:[],photo:hangmenPhotos[0],photonr:0}
+					];
+	$scope.currentPlayer = $scope.players[0].name;
+
+	
 
 	$scope.letterTab = [{row:1, letters:['Q','W','E','R','T','Y','U','I','O','P']},
 					  {row:2, letters: ['A','S','D','F','G','H','J','K','L']},
@@ -17,45 +24,73 @@ function($scope){
 	];
 
 	$scope.letterClicked = function(lineIndex, letterIndex){
+
+		var tempplayer = [];
 		var tempIndex = 0;
 		var actuallyRiddleText =[];
-		
-		
-		for(var i=0;i<=riddleText.length-1;i++){
-			if($scope.letterTab[lineIndex].letters[letterIndex] == riddleText[i]){
-				actuallyRiddleText=$scope.hiddenRiddleText;
+
+		if(playerOne==true){
+			tempplayer=$scope.players[0];
+			
+		}else if(playerTwo==true){
+			tempplayer=$scope.players[1];
+		}
+
+		for(var i=0;i<=tempplayer.riddleText.length-1;i++){
+			if($scope.letterTab[lineIndex].letters[letterIndex] == tempplayer.riddleText[i]){
+				actuallyRiddleText=tempplayer.hiddenRiddleText;
 				tempIndex=i;
-				isWin++;
+				tempplayer.isWin++;
 				tempIndex=0;
-				$scope.hiddenRiddleText[i]=$scope.letterTab[lineIndex].letters[letterIndex];
-				if($scope.hiddenRiddleText.length==isWin){
-					setTimeout(function(){ alert("Wygrales :)"); }, 20);
+				tempplayer.hiddenRiddleText[i]=$scope.letterTab[lineIndex].letters[letterIndex];
+				if(tempplayer.hiddenRiddleText.length==tempplayer.isWin){
+					setTimeout(function(){ alert("Wygrales gracz " + tempplayer.name); }, 20);
 				}
 				
 			}
 		}
-		if(actuallyRiddleText!=$scope.hiddenRiddleText){
-			$scope.chances--;
+		if(tempplayer.chances==tempplayer.isLose){
+			setTimeout(function(){ alert("Przegral gracz " + tempplayer.name); }, 20);
 		}
-		if($scope.chances==isLose){
-			setTimeout(function(){ alert("Przegrales :("); }, 20);
+
+		if(actuallyRiddleText!=tempplayer.hiddenRiddleText){
+			tempplayer.chances--;
+			if(playerOne==true){
+
+				$scope.players[0]=tempplayer;
+				playerOne=false;
+				playerTwo=true;
+				$scope.currentPlayer=$scope.players[1].name;
+				$scope.players[0].photonr++;
+				$scope.players[0].photo=hangmenPhotos[$scope.players[0].photonr];
+			}else if(playerTwo==true){
+				$scope.players[1]=tempplayer;
+				playerOne=true;
+				playerTwo=false;
+				$scope.currentPlayer=$scope.players[0].name;
+				$scope.players[1].photonr++;
+				$scope.players[1].photo=hangmenPhotos[$scope.players[1].photonr];
+			}
+		}
+			};
+
+	convertTextToTab = function(text,riddleText){
+		for(var i=0;i<=text.length-1;i++){
+			riddleText.push(text[i].toUpperCase());
 		}
 	};
 
-	$scope.convertTextToTab = function(){
-		for(var i=0;i<=$scope.text.length-1;i++){
-			riddleText.push($scope.text[i].toUpperCase());
-		}
-	};
-
-	$scope.makeTextHide = function(){
+	makeTextHide = function(riddleText,hiddenRiddleText){
 		for(var i=0;i<=riddleText.length-1;i++){			
-			$scope.hiddenRiddleText.push('_');
+			hiddenRiddleText.push('_');
 		}
 
 	}
 
-	$scope.convertTextToTab();
-	$scope.makeTextHide();
+	convertTextToTab($scope.players[0].text,$scope.players[0].riddleText);
+	makeTextHide($scope.players[0].riddleText,$scope.players[0].hiddenRiddleText);
+	convertTextToTab($scope.players[1].text,$scope.players[1].riddleText);
+	makeTextHide($scope.players[1].riddleText,$scope.players[1].hiddenRiddleText);
+
 
 }]);

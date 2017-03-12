@@ -4,6 +4,8 @@ angular.module('hangmeoutApp').controller('mainCtrl', [
 function($scope,$http){
 
 	$scope.players = [];
+	$scope.categories = [];
+	$scope.tips = [];
 
 
 	$http.get("/riddles").then(function (response) {
@@ -18,13 +20,29 @@ function($scope,$http){
 		$scope.makeTextHide($scope.players[1].riddleText,$scope.players[1].hiddenRiddleText);
         return response.data;
     });
-	
+
+    $scope.newGame = function(){
+
+		$scope.categories = [];
+		$scope.tips = [];
+    	$scope.players=[{name:"Konrad", text:$scope.getRandomRiddle(), isWin:0,isLose:1,chances:5,riddleText:[],hiddenRiddleText:[],photo:hangmenPhotos[0],photonr:0},
+					{name:"Kicia", text:$scope.getRandomRiddle(), isWin:0,isLose:1,chances:5,riddleText:[],hiddenRiddleText:[],photo:hangmenPhotos[0],photonr:0}
+					];
+		$scope.convertTextToTab($scope.players[0].text,$scope.players[0].riddleText);
+		$scope.makeTextHide($scope.players[0].riddleText,$scope.players[0].hiddenRiddleText);
+		$scope.convertTextToTab($scope.players[1].text,$scope.players[1].riddleText);
+		$scope.makeTextHide($scope.players[1].riddleText,$scope.players[1].hiddenRiddleText);
+		$scope.clickedLettersOne = [];
+		$scope.clickedLettersTwo = [];
+    }
 	$scope.playerOne=true;
 	$scope.playerTwo=false;
 
 	$scope.getRandomRiddle = function(){
 		$scope.randomNumber = Math.floor(Math.random() * $scope.riddlesCount-1) + 1  ;
 		$scope.riddleOut = $scope.riddles[$scope.randomNumber].text;
+		$scope.categories.push($scope.riddles[$scope.randomNumber].category);
+		$scope.tips.push($scope.riddles[$scope.randomNumber].tip);
 		return $scope.riddleOut;
 	}
 	
@@ -88,18 +106,18 @@ function($scope,$http){
 				tempplayer.isWin++;
 				tempIndex=0;
 				tempplayer.hiddenRiddleText[i]=$scope.letterTab[lineIndex].letters[letterIndex];
-				if(tempplayer.hiddenRiddleText.length-1==tempplayer.isWin && tempplayer.hiddenRiddleText.indexOf(' ')>=0){
+				if(tempplayer.hiddenRiddleText.length-1==tempplayer.isWin && tempplayer.hiddenRiddleText.indexOf('|')>=0){
 					setTimeout(function(){ alert("Wygrales gracz " + tempplayer.name); }, 20);
+					$scope.newGame();
 				}
 				else if(tempplayer.hiddenRiddleText.length==tempplayer.isWin ){
 					setTimeout(function(){ alert("Wygrales gracz " + tempplayer.name); }, 20);
+					$scope.newGame();
 				}
 				
 			}
 		}
-		if(tempplayer.chances==tempplayer.isLose){
-			setTimeout(function(){ alert("Przegral gracz " + tempplayer.name); }, 20);
-		}
+		
 
 		if(actuallyRiddleText!=tempplayer.hiddenRiddleText){
 			tempplayer.chances--;
@@ -120,6 +138,10 @@ function($scope,$http){
 				$scope.players[1].photo=hangmenPhotos[$scope.players[1].photonr];
 			}
 		}
+		if(tempplayer.chances==tempplayer.isLose){
+			setTimeout(function(){ alert("Przegral gracz " + tempplayer.name); }, 20);
+			$scope.newGame();
+		}
 	
 	};
 
@@ -132,7 +154,7 @@ function($scope,$http){
 	$scope.makeTextHide = function(riddleText,hiddenRiddleText){
 		for(var i=0;i<=riddleText.length-1;i++){	
 			if(riddleText[i]==" "){
-				hiddenRiddleText.push(' ');
+				hiddenRiddleText.push('|');
 			}
 			else{
 				hiddenRiddleText.push('_');

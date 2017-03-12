@@ -6,3 +6,31 @@ body {
 a {
   color: #00B7FF;
 }
+
+.green-border{
+	border-color:green;
+}
+
+.green-border .panel-heading{
+	background-color: green;
+}
+
+.imageRight {
+	float:right;
+}
+.panelLeft {
+	float:left;
+}
+
+.imageLeft {
+	float:left;
+}
+.panelRight {
+	float:right;
+}
+
+.imageBorder {
+	border:solid;
+	border:1px;
+	border-color:black;
+}

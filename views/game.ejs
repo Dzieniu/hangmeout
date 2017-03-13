@@ -1,0 +1,65 @@
+
+  <div  style="text-align:center">
+<!--   	<h2>Modal Example</h2>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#m">Open Modal</button>
+  <div class="modal fade" id="my" role="dialog">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div> -->
+<!--   	<h5>zagadka</h5>
+  	<input ng-model="riddleText"></input>
+  	<h5>kategoria</h5>
+  	<input ng-model="riddleCategory"></input>
+  	<h5>tip</h5>
+  	<input ng-model="riddleTip"></input> --><!-- 
+  	<button ng-click="newGame()">wyslij</button> -->
+
+  	
+  	<div >
+  		<div >
+	  		<div class="col-md-6 " ng-repeat="player in players " style="display:inline-block;padding-bottom: 50px;">
+          <div class="row">
+          <div class="col-md-12">
+            <div class="imageBorder" ng-class="{'imageRight':$index==1,'imageLeft':$index==0}" style="width:30%"><img src="{{players[$index].photo}}" style="height:55%;width:55% "/></div>
+            <div class="panel panel-primary"   ng-class="{'green-border': $index==1,'panelLeft':$index==1,'panelRight':$index==0 }" style="width:70%">
+              <div class="panel-heading" style="line-height: normal;text-overflow: ellipsis; height:40px">
+              <h4 class="panel-title pull-left"><b>{{player.name}}</b></h4> <h4 class="panel-title pull-right">Liczba szans: {{player.chances}}</h4>
+              </div>
+              <div class="panel-body">
+                <h4>Kategoria: {{categories[$index]}}</h4>
+                <h5>Podpowiedź: {{tips[$index]}}</h5>
+              </div>
+            </div>
+          </div>
+          </div>
+          <div class="col-md-12" align="center" >
+            <p  ng-repeat="line in player.hiddenRiddleText track by $index" style="display:inline-block;cursor:pointer; font-size:26px">
+              {{line}} &nbsp;
+            </p>
+          </div>
+	  		</div>
+	  	</div>
+	  	
+  	</div>
+      <div style="padding-bottom:20px" ><h4>Następny ruch: {{currentPlayer}}</h4></div>
+  		<div class="col-md-12 " align="center" ng-repeat="(lineIndex, line) in letterTab" style="padding-bottom: 50px;">
+	  		<span ng-repeat="letter in line.letters" ng-click="letterClicked(lineIndex,$index)" style="width:100px;display:inline-block;text-align: center;cursor:pointer">
+	  			<div ng-hide="checkLetters(letter)">{{letter}}</div>
+	  		</span>
+  		</div>
+  	</div>
+  </div>

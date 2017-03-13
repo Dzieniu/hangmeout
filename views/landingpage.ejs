@@ -1,0 +1,26 @@
+  <div class ="row" style="">
+
+  <div class ="col-md-12" align="center" style="height:100%;color:white;padding-top:50px;padding-bottom:120px">
+    <div style="width:50%">
+    <div class="page-header">
+      <h1>HangMeOUT <small style="color:white">Learning version</small></h1>
+    </div>
+    <button ui-sref="game" class="btn btn-default" style="width:70%;background-color:transparent;color:white"><b>Graj</b></button>
+    
+    </div>
+  </div>
+  <div class ="col-md-12" align ="center" style="height:100%;color:white;">
+    <div ng-mouseenter="showRules=true" ng-mouseleave="showRules=false" style="width:50%;padding:5px 8px 8px 5px;background-color: rgba(0, 0, 0, 0.2);" >
+      <span ng-if="!showRules">Pokaż reguły</span>
+      <span ng-if="showRules">Jak grać?</span>
+      <div class="list" ng-show="showRules" >
+        <h4>Zasady: </h4>
+        <p>Prosta, popularna gra w wisielca - z nutką rywalizacji i nauczania. Odgadnij słowo przed Twoim przeciwnikiem! Pomogą Ci w tym kategoria słowa i podpowiedź.</p>
+        <h4>Cel: </h4>
+        <p>Słowa nie są byle jakie. Odgadując słowo, przy okazji możesz dowiedzieć się, co ono oznacza. Powodzenia!</p>
+        </div>
+      </div>
+  </div>
+  
+
+  </div>

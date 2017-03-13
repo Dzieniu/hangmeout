@@ -9,9 +9,6 @@ var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-
 var app = express();
 mongoose.connect('mongodb://localhost/riddles')
 var dbRoutes = require('./routes/dbroutes');
@@ -29,7 +26,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', dbRoutes);
 
-app.use('/', index);
+app.get('/', routes.index);
+app.get('/:filename', routes.pages);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

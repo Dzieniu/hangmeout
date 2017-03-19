@@ -10,7 +10,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 var app = express();
-mongoose.connect('mongodb://localhost/riddles')
+mongoose.connect('mongodb://heroku_hnc0jj5x:5sg182dkig2oe5neljmhg2vb0q@ds153179.mlab.com:53179/heroku_hnc0jj5x' || 'mongodb://localhost/mypage')
 var dbRoutes = require('./routes/dbroutes');
 
 // view engine setup

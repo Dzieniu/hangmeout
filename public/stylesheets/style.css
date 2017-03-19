@@ -10,8 +10,44 @@ a {
   color: #00B7FF;
 }
 
-.green-border{
-	border-color:green;
+.playerInput{
+  color:white ;background-color:transparent;border:none;border-bottom:solid;border-width: 2px;
+}
+
+.topHeader{
+height:100%;color:white;padding-top:50px;padding-bottom:120px
+}
+.bordere{
+  padding-left:30px;
+    border:solid;
+  border-width:2px;
+  border-color:white;
+}
+
+.letterActive{
+    border-left:solid;
+    border-right:solid;
+  border-width:2px;
+  border-color:white;
+
+}
+.red-border{
+	border-color:red;
+}
+
+.play{
+  width:70%;background-color:transparent;color:white
+}
+
+.info{
+  width:50%;padding:5px 8px 8px 5px;background-color: rgba(0, 0, 0, 0.2);
+}
+
+.blue-border{
+  border-color:blue;
+}
+.leftAlign{
+  text-align:left;
 }
 
 .green-border .panel-heading{

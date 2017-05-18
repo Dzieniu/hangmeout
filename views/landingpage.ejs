@@ -6,10 +6,10 @@
       <h1>Hang(Me)OUT <small style="color:white">Learning version</small></h1>
     </div>
     <form class="form-group" style="padding-top:10px;text-align:center">
-      <input class="playerInput" ng-model="playerOne" placeholder="Imie pierwszego gracza" ></input>
-      <input class="playerInput" ng-model="playerTwo" placeholder="Imie drugiego gracza" ></input>
+      <input type="inp" class="playerInput" ng-model="playerOne" placeholder="Imie pierwszego gracza" ></input>
+      <input type="inp" class="playerInput" ng-model="playerTwo" placeholder="Imie drugiego gracza" ></input>
     </form>
-    <button ng-disabled="!playerOne || !playerTwo "  class="btn btn-default " ng-click="start(playerOne,playerTwo)" style="width:70%;background-color:transparent;color:white"><b>Graj</b></button>
+    <button ng-disabled="!playerOne || !playerTwo "  class="playbutton" ng-click="start(playerOne,playerTwo)" style="width:70%"><b>Graj</b></button>
     
     
     </div>

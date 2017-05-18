@@ -10,12 +10,35 @@ a {
   color: #00B7FF;
 }
 
-.playerInput{
-  color:white ;background-color:transparent;border:none;border-bottom:solid;border-width: 2px;
+.page-header{
+  border-bottom:none;
+  padding-bottom:0px;
+  margin-top:20px;
 }
-
+.playbutton{
+  border: none;
+background-color: rgba(255,255,255,0.3);
+width: 100%;
+padding: 10px;
+color: black;
+}
+.playbutton:not([disabled]){
+    background-color: rgba(255,255,255,0.5);;
+}
+.playbutton:not([disabled]):hover{
+    background-color: rgba(255,255,255,0.7);;
+}
+.playerInput{
+  text-align:center;
+  font-size:15px;
+  padding:10px 15px 10px 15px;
+  color:white ;background-color:transparent;border:none;border:solid;border-width: 2px;
+}
+input[type="inp"].playerInput::-webkit-input-placeholder {
+  color: white;
+}
 .topHeader{
-height:100%;color:white;padding-top:50px;padding-bottom:120px
+height:100%;color:white;padding-top:50px;padding-bottom:70px
 }
 .bordere{
   padding-left:30px;
@@ -35,9 +58,6 @@ height:100%;color:white;padding-top:50px;padding-bottom:120px
 	border-color:red;
 }
 
-.play{
-  width:70%;background-color:transparent;color:white
-}
 
 .info{
   width:50%;padding:5px 8px 8px 5px;background-color: rgba(0, 0, 0, 0.2);

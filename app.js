@@ -10,8 +10,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 var app = express();
-// mongoose.connect('mongodb://heroku_ktqg23bx:mgtitmm35iq7fascp0vgh36tq0@ds135690.mlab.com:35690/heroku_ktqg23bx'
-//  || 'mongodb://localhost/mypage');
+mongoose.connect('mongodb://heroku_ktqg23bx:mgtitmm35iq7fascp0vgh36tq0@ds135690.mlab.com:35690/heroku_ktqg23bx'
+ || 'mongodb://localhost/mypage');
 var dbRoutes = require('./routes/dbroutes');
 
 // view engine setup

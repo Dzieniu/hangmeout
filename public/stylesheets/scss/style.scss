@@ -1,0 +1,64 @@
+@import "variables.scss";
+
+body{
+  font-family: 'Titillium Web', sans-serif;
+  background-color:black;
+  height:100vh;
+}
+header{
+  color:$text-color;
+  display:flex;
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  display:block;
+  
+  h1{
+    text-align:center;
+    span{
+      color:$first-color;
+      &.title-desc{
+        letter-spacing:1px;
+        font-weight:300;
+        margin-left:10px;
+        color:$text-color;
+        font-size:16px;
+      }
+    }
+  }
+  form{
+    margin-top:30px;
+    input,button{
+      width:100%;
+      padding:5px 15px;
+      text-align:center;
+      border:none;
+      background-color:rgba(0,0,0,0);
+    }
+    input{
+      transition:.2s;
+      border-bottom:solid 1px darken($text-color,40%);
+      &:first-child{
+        margin-bottom:10px;
+      }
+      &:focus{
+        outline:none !important;
+        border-bottom:1px solid $first-color;
+      }
+      &[type=submit]{
+        border:none;
+        font-size:20px;
+        letter-spacing:1px;
+        font-weight:300;
+        margin-top:20px;
+        color:$first-color;
+        transition:.2s;
+        &:hover{
+          background-color:rgba(255,255,255,.1);
+          cursor:pointer;
+        }
+      }
+    }
+  }
+}

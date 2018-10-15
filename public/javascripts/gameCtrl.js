@@ -3,21 +3,14 @@ angular.module('hangmeoutApp').controller('gameCtrl', [
 
 function($scope,$http,playersService,$state){
 	$scope.showModal = false;
-    $scope.buttonClicked = "";
-    $scope.playersName = playersService.getProducts();
+  $scope.buttonClicked = "";
+  $scope.playersName = playersService.getPlayers();
 	$scope.isRefresh = function(){
-    	if($scope.playersName.length==0){
-    		$state.go('home');
-    	};
+    if($scope.playersName.length==0){
+      $state.go('home');
     };
-    $scope.isRefresh();
-
-    
-
-    $scope.toggleModal = function(btnClicked){
-        $scope.buttonClicked = btnClicked;
-        $scope.showModal = !$scope.showModal;
-    };
+  };
+  $scope.isRefresh();
  	$scope.players = [];
 	$scope.categories = [];
 	$scope.tips = [];
@@ -26,38 +19,41 @@ function($scope,$http,playersService,$state){
 	$scope.countOne=0;
 	$scope.countTwo=0;
 
+  $scope.toggleModal = function(btnClicked){
+    $scope.buttonClicked = btnClicked;
+    $scope.showModal = !$scope.showModal;
+  };
 
 	$http.get("/riddles").then(function (response) {
-        $scope.riddles = response.data; //See ? this variable is no longer set as result of the $http return !
-        $scope.riddlesCount = $scope.riddles.length;
-
+    $scope.riddles = response.data; 
+    $scope.riddlesCount = $scope.riddles.length;
 		$scope.players[0].text = $scope.getRandomRiddle();
 		$scope.players[1].text = $scope.getRandomRiddle();
 		$scope.convertTextToTab($scope.players[0].text,$scope.players[0].riddleText);
 		$scope.makeTextHide($scope.players[0].riddleText,$scope.players[0].hiddenRiddleText);
 		$scope.convertTextToTab($scope.players[1].text,$scope.players[1].riddleText);
 		$scope.makeTextHide($scope.players[1].riddleText,$scope.players[1].hiddenRiddleText);
-        return response.data;
-    });
+    return response.data;
+  });
 
-    $scope.newGame = function(){
-
-		$scope.riddless = [];
-		$scope.categories = [];
-		$scope.tips = [];
-		$scope.expln = [];
-    	$scope.players=[{name:$scope.playersName[0], text:$scope.getRandomRiddle(), isWin:0,isLose:0,chances:9,riddleText:[],hiddenRiddleText:[],photo:hangmenPhotos[0],photonr:0},
-					{name:$scope.playersName[1], text:$scope.getRandomRiddle(), isWin:0,isLose:0,chances:9,riddleText:[],hiddenRiddleText:[],photo:hangmenPhotos[0],photonr:0}
-					];
-		$scope.convertTextToTab($scope.players[0].text,$scope.players[0].riddleText);
-		$scope.makeTextHide($scope.players[0].riddleText,$scope.players[0].hiddenRiddleText);
-		$scope.convertTextToTab($scope.players[1].text,$scope.players[1].riddleText);
-		$scope.makeTextHide($scope.players[1].riddleText,$scope.players[1].hiddenRiddleText);
-		$scope.clickedLettersOne = [];
-		$scope.clickedLettersTwo = [];
-    }
+  $scope.newGame = function(){
+  $scope.riddless = [];
+  $scope.categories = [];
+  $scope.tips = [];
+  $scope.expln = [];
+  $scope.players=[
+    {name:$scope.playersName[0], text:$scope.getRandomRiddle(), isWin:0,isLose:0,chances:7,riddleText:[],hiddenRiddleText:[],photo:hangmenPhotos[0],photonr:0},
+    {name:$scope.playersName[1], text:$scope.getRandomRiddle(), isWin:0,isLose:0,chances:7,riddleText:[],hiddenRiddleText:[],photo:hangmenPhotos[0],photonr:0}
+  ];
+  $scope.convertTextToTab($scope.players[0].text,$scope.players[0].riddleText);
+  $scope.makeTextHide($scope.players[0].riddleText,$scope.players[0].hiddenRiddleText);
+  $scope.convertTextToTab($scope.players[1].text,$scope.players[1].riddleText);
+  $scope.makeTextHide($scope.players[1].riddleText,$scope.players[1].hiddenRiddleText);
+  $scope.clickedLettersOne = [];
+  $scope.clickedLettersTwo = [];
+  }
 	$scope.playerOne=true;
-	$scope.playerTwo=false;
+  $scope.playerTwo=false;
 	$scope.winPlayer="";
 	$scope.winRiddle=[];
 
@@ -72,15 +68,13 @@ function($scope,$http,playersService,$state){
 	}
 	
 	
-	var hangmenPhotos = ["images/1.png","images/2.png","images/3.png","images/4.png","images/5.png","images/6.png","images/7.png","images/8.png","images/9.png","images/10.png"];
+	var hangmenPhotos = ["images/0.png","images/1.png","images/2.png","images/3.png","images/4.png","images/5.png","images/6.png","images/7.png"];
 
-	$scope.players=[{name:$scope.playersName[0], text:"", isWin:0,isLose:0,chances:9,riddleText:[],hiddenRiddleText:[],photo:hangmenPhotos[0],photonr:0},
-					{name:$scope.playersName[1], text:"", isWin:0,isLose:0,chances:9,riddleText:[],hiddenRiddleText:[],photo:hangmenPhotos[0],photonr:0}
-					];
+	$scope.players=[
+    {name:$scope.playersName[0], text:"", isWin:0,isLose:0,chances:7,riddleText:[],hiddenRiddleText:[],photo:hangmenPhotos[0],photonr:0},
+    {name:$scope.playersName[1], text:"", isWin:0,isLose:0,chances:7,riddleText:[],hiddenRiddleText:[],photo:hangmenPhotos[0],photonr:0}
+  ];
 	$scope.currentPlayer = $scope.players[0].name;
-
-	
-
 	$scope.letterTab = [{row:1, letters:['Q','W','E','R','T','Y','U','I','O','P']},
 					  {row:2, letters: ['A','S','D','F','G','H','J','K','L']},
 					  {row:3, letters: ['Z','X', 'C','V', 'B','N','M']}
@@ -102,9 +96,7 @@ function($scope,$http,playersService,$state){
 	}
 
 	$scope.postData = function(txt,cat,ti,exp){
-		console.log(txt);
-		data = { text: txt ,category: cat, tip: ti, explenation: exp}
-		
+		data = { text: txt ,category: cat, tip: ti, explenation: exp}		
 		$http.post("/riddles", data).success(function(data2,status) {
 		});
 	}
@@ -153,8 +145,6 @@ function($scope,$http,playersService,$state){
 				
 			}
 		}
-		
-
 		if(actuallyRiddleText!=tempplayer.hiddenRiddleText){
 			tempplayer.chances--;
 			if($scope.playerOne==true){
@@ -210,7 +200,7 @@ function($scope,$http,playersService,$state){
 
 }]).directive('modal', function () {
     return {
-      template: '<div class="modal fade">' + 
+      template: '<div class="modal fade" ng-click="newGame()">' + 
           '<div class="modal-dialog">' + 
             '<div class="modal-content">' + 
               '<div class="modal-header">' + 

@@ -1,0 +1,51 @@
+@import 'variables.scss';
+
+.currentPlayer{
+  color:$first-color;
+}
+#game-info{
+  text-align:center;
+  color:$text-color;
+  
+}
+#user-info{
+  .player{
+    position:relative;
+    .hidePlan{
+      position:absolute;
+      width:100%;
+      height:100%;
+      background-color:rgba(0,0,0,0.6);
+    }
+  }
+  
+  text-align:center;
+  color:$text-color;
+  img{
+    height:200px;
+    display:block;
+    margin:0 auto;
+  }
+  .riddle{
+    color:white;
+  }
+}
+#keyboard{
+  padding-top:60px;
+  position:absolute;
+  bottom:0;
+  left:0;
+  background-color:lighten(black,5%);
+  .letter{
+    padding-bottom:5px;
+    &:hover{
+      color:$first-color;
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  #keyboard{
+    position:initial;
+  }
+}

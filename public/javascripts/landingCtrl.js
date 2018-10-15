@@ -4,8 +4,8 @@ angular.module('hangmeoutApp').controller('landingCtrl', [
 function($scope,playersService,$state){
 
 	$scope.start = function(one,two){
-		playersService.addProduct(one);
-		playersService.addProduct(two);
+		playersService.addPlayer(one);
+		playersService.addPlayer(two);
 		$state.go('game');
 	}
 }]);

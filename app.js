@@ -11,13 +11,12 @@ var mongoose = require('mongoose');
 
 var app = express();
 mongoose.connect('mongodb://heroku_ktqg23bx:mgtitmm35iq7fascp0vgh36tq0@ds135690.mlab.com:35690/heroku_ktqg23bx'
- || 'mongodb://localhost/mypage');
+ || 'mongodb://localhost/mypage', { useMongoClient: true });
 var dbRoutes = require('./routes/dbroutes');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -47,6 +46,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 module.exports = app;
 
